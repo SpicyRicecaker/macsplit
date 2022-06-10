@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct macsplitApp: App {
+    @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            ZStack {
+                  EmptyView()
+            }.hidden()
         }
     }
 }
+
