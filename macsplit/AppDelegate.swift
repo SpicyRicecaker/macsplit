@@ -22,10 +22,10 @@ func getStringFromSeconds(time: Double) -> String {
         // minutes
     } else if time < 60 * 60 {
         // see https://stackoverflow.com/a/33447385 for an explanation of why we're using %04.1f
-        return "\(String(wholeTime/60)):\(String(format: "%04.1f", time.remainder(dividingBy:60.0)))"
+        return "\(String(wholeTime/60)):\(String(format: "%04.1f", time.truncatingRemainder(dividingBy:60.0)))"
         // hours
     } else {
-        return "\(String(wholeTime/3600)):\(String(format: "%02d", wholeTime/60%60)):\(String(format: "%04.1f", time.remainder(dividingBy: 60.0)))"
+        return "\(String(wholeTime/3600)):\(String(format: "%02d", wholeTime/60%60)):\(String(format: "%04.1f", time.truncatingRemainder(dividingBy: 60.0)))"
     }
 }
 
@@ -93,6 +93,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
         
         // 2
         let startStop = NSMenuItem(title: "Start/Stop", action: #selector(didTapStartStop) , keyEquivalent: "p")
+        startStop.allowsKeyEquivalentWhenHidden = true
+        
         menu.addItem(startStop)
         
         let reset = NSMenuItem(title: "Reset", action: #selector(didTapReset) , keyEquivalent: "r")
